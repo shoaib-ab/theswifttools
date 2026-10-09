@@ -1,26 +1,305 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ==========================================================================
+   THEME TOKENS: SINGLE SOURCE OF TRUTH (Tailwind v4 Theme Engine)
+   ========================================================================== */
+@theme {
+  --font-heading: var(--font-heading), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Typography Scale Tokens (Strict Hierarchy) */
+  --text-2xs: 0.6875rem; /* 11px - micro labels, badges */
+  --text-2xs--line-height: 1rem;
+
+  --text-xs: 0.75rem; /* 12px - fine print, pills, metadata */
+  --text-xs--line-height: 1.125rem;
+
+  --text-sm: 0.875rem; /* 14px - captions, secondary copy, compact buttons */
+  --text-sm--line-height: 1.25rem;
+
+  --text-base: 1rem; /* 16px - standard body, card descriptions, input text */
+  --text-base--line-height: 1.5rem;
+
+  --text-lg: 1.125rem; /* 18px - lead descriptions, card titles, large CTAs */
+  --text-lg--line-height: 1.75rem;
+
+  --text-xl: 1.25rem; /* 20px - section headings, FAQ questions, feature titles */
+  --text-xl--line-height: 1.75rem;
+
+  --text-2xl: 1.5rem; /* 24px - major section titles, step numbers */
+  --text-2xl--line-height: 2rem;
+
+  --text-3xl: 1.875rem; /* 30px - tool page H1 titles */
+  --text-3xl--line-height: 2.25rem;
+
+  --text-4xl: 2.25rem; /* 36px - homepage hero display title */
+  --text-4xl--line-height: 2.5rem;
+
+  --text-5xl: 3rem; /* 48px - prominent display headers */
+  --text-5xl--line-height: 1.1;
+
+  /* Brand Color Tokens (Single Source of Truth) */
+  --color-brand: #dc2626; /* Brand Red (red-600) */
+  --color-brand-hover: #b91c1c; /* Brand Red Dark (red-700) */
+  --color-brand-active: #991b1b; /* Brand Red Active (red-800) */
+  --color-brand-light: #fef2f2; /* Brand Red Subtle Background (red-50) */
+  --color-brand-border: #fecaca; /* Brand Red Border (red-200) */
+  --color-brand-text: #ffffff;
+
+  /* Category Identity Tokens */
+  --color-cat-pdf: #dc2626;
+  --color-cat-images: #2563eb;
+  --color-cat-calc: #059669;
+  --color-cat-text: #7c3aed;
+  --color-cat-color: #e11d48;
+}
+
+/* ==========================================================================
+   CSS CUSTOM PROPERTIES: RUNTIME TOKEN ACCESS
+   ========================================================================== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Font Family Tokens */
+  --token-font-heading: var(--font-heading), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --token-font-body: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Semantic Font Sizes */
+  --token-fs-badge: 0.6875rem;  /* 11px */
+  --token-fs-label: 0.75rem;    /* 12px */
+  --token-fs-caption: 0.875rem; /* 14px */
+  --token-fs-body: 1rem;        /* 16px */
+  --token-fs-card-title: 1.125rem; /* 18px */
+  --token-fs-lead: 1.125rem;    /* 18px */
+  --token-fs-h3: 1.25rem;       /* 20px */
+  --token-fs-h2: 1.5rem;        /* 24px */
+  --token-fs-h1: 1.875rem;      /* 30px */
+  --token-fs-hero: 2.25rem;     /* 36px */
+
+  /* Semantic Brand Palette */
+  --token-brand: #dc2626;
+  --token-brand-hover: #b91c1c;
+  --token-brand-light: #fef2f2;
+  --token-brand-border: #fecaca;
+
+  /* Neutral Surface & Border Tokens */
+  --token-surface-bg: #ffffff;
+  --token-surface-subtle: #f4f4f5;
+  --token-border-subtle: #e4e4e7;
+  --token-border-strong: #d4d4d8;
+  --token-text-primary: #09090b;
+  --token-text-secondary: #3f3f46;
+  --token-text-muted: #71717a;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.dark {
+  --token-brand-light: rgba(69, 10, 10, 0.4);
+  --token-brand-border: rgba(127, 29, 29, 0.6);
+
+  --token-surface-bg: #09090b;
+  --token-surface-subtle: #18181b;
+  --token-border-subtle: #27272a;
+  --token-border-strong: #3f3f46;
+  --token-text-primary: #fafafa;
+  --token-text-secondary: #d4d4d8;
+  --token-text-muted: #a1a1aa;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    letter-spacing: -0.011em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    letter-spacing: -0.03em;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ==========================================================================
+   SEMANTIC UTILITY CLASSES (Applied consistently across components)
+   ========================================================================== */
+@layer utilities {
+  .tabular-digits {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Explicit Font Family Utility Tokens */
+  .font-heading {
+    font-family: var(--font-heading), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  .font-body {
+    font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  /* Standardized Typography Classes */
+  .type-hero {
+    font-family: var(--font-heading), sans-serif;
+    font-size: var(--token-fs-hero);
+    line-height: 1.15;
+    font-weight: 900;
+    letter-spacing: -0.035em;
+  }
+
+  .type-tool-title {
+    font-family: var(--font-heading), sans-serif;
+    font-size: var(--token-fs-h1);
+    line-height: 1.2;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+  }
+
+  .type-section-title {
+    font-size: var(--token-fs-h2);
+    line-height: 1.25;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+  }
+
+  .type-card-title {
+    font-size: var(--token-fs-card-title);
+    line-height: 1.35;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .type-faq-q {
+    font-size: var(--token-fs-h3);
+    line-height: 1.35;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .type-lead {
+    font-size: var(--token-fs-lead);
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  .type-body {
+    font-size: var(--token-fs-body);
+    line-height: 1.55;
+    font-weight: 400;
+  }
+
+  .type-card-desc {
+    font-size: var(--token-fs-body);
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  .type-caption {
+    font-size: var(--token-fs-caption);
+    line-height: 1.4;
+    font-weight: 500;
+  }
+
+  .type-label {
+    font-size: var(--token-fs-label);
+    line-height: 1.3;
+    font-weight: 600;
+  }
+
+  .type-badge {
+    font-size: var(--token-fs-badge);
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* Standardized Brand Action Button */
+  .btn-brand-primary {
+    background-color: var(--token-brand);
+    color: #ffffff;
+    font-weight: 800;
+    border-radius: 1rem;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+  }
+  .btn-brand-primary:hover {
+    background-color: var(--token-brand-hover);
+    box-shadow: 0 10px 15px -3px rgba(220, 38, 38, 0.25);
+  }
 }
+
+::selection {
+  background-color: rgba(220, 38, 38, 0.15);
+  color: inherit;
+}
+
+.dark ::selection {
+  background-color: rgba(220, 38, 38, 0.3);
+  color: inherit;
+}
+
+/* ==========================================================================
+   ILOVEPDF-STYLE PARALLAX PATTERN BACKGROUND
+   ========================================================================== */
+.pattern-bg {
+  width: 100vw;
+  background-image: url("/background.svg");
+  background-size: 100% auto;
+  background-position: 50% top;
+  background-repeat: repeat-y;
+  opacity: 0.95;
+  transition: opacity 0.3s ease;
+}
+
+.dark .pattern-bg {
+  opacity: 0.22;
+  filter: brightness(0.85) contrast(1.1);
+}
+
+/* ==========================================================================
+   PREMIUM HEADING HIGHLIGHT BADGE / SELECTION STYLE (Zero radius)
+   ========================================================================== */
+.heading-highlight {
+  display: inline-block;
+  padding: 0.04em 0.3em;
+  margin: 0 0.06em;
+  background-color: #fee2e2; /* Tailwind red-100 soft blush selection */
+  color: #09090b;
+  border-radius: 0px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  line-height: 1.15;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dark .heading-highlight {
+  background-color: rgba(220, 38, 38, 0.28);
+  color: #fafafa;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: 0px;
+}
+
+/* ==========================================================================
+   PREMIUM CARD SURFACE & ELEVATED AMBIENT SHADOW SYSTEM
+   ========================================================================== */
+.card-premium {
+  background: linear-gradient(180deg, #ffffff 0%, rgba(250, 250, 250, 0.9) 100%);
+  border: 1px solid rgba(228, 228, 231, 0.85);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 4px 10px -2px rgba(0, 0, 0, 0.02);
+}
+
+.dark .card-premium {
+  background: linear-gradient(180deg, rgba(24, 24, 27, 0.95) 0%, rgba(14, 14, 17, 0.92) 100%);
+  border: 1px solid rgba(39, 39, 42, 0.85);
+  box-shadow: 0 14px 35px -8px rgba(0, 0, 0, 0.55), 0 4px 12px -2px rgba(0, 0, 0, 0.35);
+}
+
+/* Elevate tool workspace cards across all tools with relaxing ambient shadow */
+.shadow-sm {
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.06), 0 2px 8px -2px rgba(0, 0, 0, 0.03) !important;
+}
+
+.dark .shadow-sm {
+  box-shadow: 0 10px 30px -4px rgba(0, 0, 0, 0.5), 0 4px 10px -2px rgba(0, 0, 0, 0.35) !important;
+}
+
+
