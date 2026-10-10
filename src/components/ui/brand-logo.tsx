@@ -1,0 +1,91 @@
+import React from "react";
+
+interface BrandLogoProps {
+  /** Size of the logo icon in pixels (width and height). Default: 36 */
+  size?: number;
+  /** Custom classes for the logo container */
+  className?: string;
+  /** Whether to show the text label "TheSwiftTools" alongside the logo */
+  showText?: boolean;
+  /** Custom classes for the brand text */
+  textClassName?: string;
+}
+
+export function BrandLogo({
+  size = 36,
+  className = "",
+  showText = false,
+  textClassName = "",
+}: BrandLogoProps) {
+  return (
+    <div className={`inline-flex items-center gap-2.5 ${className}`}>
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 64 64"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="shrink-0 transition-transform duration-200 group-hover:scale-105"
+        aria-hidden="true"
+      >
+        <defs>
+          <linearGradient id="swiftBrandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#EF4444" />
+            <stop offset="50%" stopColor="#DC2626" />
+            <stop offset="100%" stopColor="#991B1B" />
+          </linearGradient>
+          <linearGradient id="swiftBrandShine" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#ffffff" stopOpacity="0.4" />
+            <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+          </linearGradient>
+          <filter id="swiftBrandShadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="1.5" stdDeviation="1.5" floodColor="#450a0a" floodOpacity="0.5" />
+          </filter>
+        </defs>
+
+        {/* Squircle Badge Container */}
+        <rect width="64" height="64" rx="16" fill="url(#swiftBrandGrad)" />
+        <rect
+          x="1"
+          y="1"
+          width="62"
+          height="62"
+          rx="15"
+          fill="none"
+          stroke="url(#swiftBrandShine)"
+          strokeWidth="1.2"
+        />
+
+        {/* Dynamic Aerodynamic Swift in Flight */}
+        <path
+          filter="url(#swiftBrandShadow)"
+          fill="#ffffff"
+          d="
+            M 13 15
+            C 25 17 38 27 44 38
+            C 48 35 51 29 52 23
+            C 51 32 46 41 39 45
+            C 43 46 48 48 51 51
+            C 44 50 38 47 33 44
+            C 28 47 21 51 13 52
+            C 18 47 22 40 23 33
+            C 18 34 14 37 11 40
+            C 13 34 18 28 23 24
+            C 18 22 15 19 13 15
+            Z
+          "
+        />
+      </svg>
+
+      {showText && (
+        <span
+          className={`font-extrabold tracking-tight text-zinc-950 dark:text-zinc-50 ${
+            textClassName || "text-lg sm:text-xl"
+          }`}
+        >
+          TheSwiftTools
+        </span>
+      )}
+    </div>
+  );
+}

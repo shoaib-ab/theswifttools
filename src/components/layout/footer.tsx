@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { BrandLogo } from "@/components/ui/brand-logo";
 import {
-  Zap,
   Shield,
   Sparkles,
   Lock,
@@ -17,7 +17,7 @@ export function Footer() {
   return (
     <div className="relative z-40 w-full">
       {/* Top Value / Trust Highlights Strip (Zero lines, clean grid above footer) */}
-      <div className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
+      <div className="pt-2 pb-8 sm:py-16 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
             {/* Card 1: Privacy */}
@@ -78,17 +78,15 @@ export function Footer() {
       {/* Floating Island Footer Section (Max-width, White/Red gradient, Box shadow, Bottom spacing) */}
       <footer className="w-full px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16 text-zinc-600 dark:text-zinc-400">
         <div className="mx-auto max-w-7xl rounded-3xl sm:rounded-[2rem] border border-red-100/90 dark:border-zinc-800 bg-gradient-to-b from-white via-white to-red-50/35 dark:from-zinc-900/95 dark:via-zinc-900/95 dark:to-red-950/20 shadow-xl shadow-zinc-200/50 dark:shadow-black/50 p-8 sm:p-12 lg:p-14">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 sm:gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 sm:gap-12">
             {/* Brand & Security Column */}
             <div className="lg:col-span-2 space-y-5">
               <Link
                 href="/"
                 className="flex items-center gap-2.5 text-zinc-950 dark:text-zinc-50 group w-fit"
               >
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-red-600 text-white shadow-xs group-hover:scale-105 transition-transform">
-                  <Zap className="h-5 w-5 fill-current" />
-                </div>
-                <span className="font-extrabold text-xl tracking-tight text-zinc-950 dark:text-zinc-50">
+                <BrandLogo size={36} />
+                <span className="font-extrabold text-xl tracking-tight text-zinc-950 dark:text-zinc-50 group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors">
                   TheSwiftTools
                 </span>
               </Link>
@@ -106,95 +104,98 @@ export function Footer() {
               </div>
             </div>
 
-            {/* PDF & Document Suite */}
-            <div className="space-y-4">
-              <h3 className="font-bold text-zinc-950 dark:text-zinc-100 text-sm uppercase tracking-wider">
-                PDF &amp; Documents
-              </h3>
-              <ul className="space-y-2.5 text-[15px]">
-                {[
-                  { name: "Word to PDF", href: "/tools/word-to-pdf" },
-                  { name: "Merge PDF", href: "/tools/merge-pdf" },
-                  { name: "Split PDF", href: "/tools/split-pdf" },
-                  { name: "Compress PDF", href: "/tools/compress-pdf" },
-                  { name: "Rotate PDF", href: "/tools/rotate-pdf" },
-                  { name: "PDF to JPG", href: "/tools/pdf-to-jpg" },
-                  { name: "Image to PDF", href: "/tools/image-to-pdf" },
-                ].map((tool) => (
-                  <li key={tool.href}>
-                    <Link
-                      href={tool.href}
-                      className="font-medium text-zinc-600 dark:text-zinc-400 hover:text-red-600 dark:hover:text-red-400 transition-colors"
-                    >
-                      {tool.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {/* Footer Section Links: 2 Columns on smaller screens, 3 Columns on tablet & desktop */}
+            <div className="lg:col-span-3 grid grid-cols-2 sm:grid-cols-3 gap-8 sm:gap-10">
+              {/* PDF & Document Suite */}
+              <div className="space-y-4">
+                <h3 className="font-bold text-zinc-950 dark:text-zinc-100 text-sm uppercase tracking-wider">
+                  PDF &amp; Documents
+                </h3>
+                <ul className="space-y-2.5 text-sm sm:text-[15px]">
+                  {[
+                    { name: "Word to PDF", href: "/tools/word-to-pdf" },
+                    { name: "Merge PDF", href: "/tools/merge-pdf" },
+                    { name: "Split PDF", href: "/tools/split-pdf" },
+                    { name: "Compress PDF", href: "/tools/compress-pdf" },
+                    { name: "Rotate PDF", href: "/tools/rotate-pdf" },
+                    { name: "PDF to JPG", href: "/tools/pdf-to-jpg" },
+                    { name: "Image to PDF", href: "/tools/image-to-pdf" },
+                  ].map((tool) => (
+                    <li key={tool.href}>
+                      <Link
+                        href={tool.href}
+                        className="font-medium text-zinc-600 dark:text-zinc-400 hover:text-red-600 dark:hover:text-red-400 transition-colors"
+                      >
+                        {tool.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-            {/* Image Studio */}
-            <div className="space-y-4">
-              <h3 className="font-bold text-zinc-950 dark:text-zinc-100 text-sm uppercase tracking-wider">
-                Image Studio
-              </h3>
-              <ul className="space-y-2.5 text-[15px]">
-                {[
-                  { name: "Compress Image", href: "/tools/compress-image" },
-                  { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
-                  { name: "Image Resizer", href: "/tools/image-resizer" },
-                  { name: "Crop Image", href: "/tools/crop-image" },
-                  { name: "JPG to PNG", href: "/tools/jpg-to-png" },
-                  { name: "PNG to WebP", href: "/tools/png-to-webp" },
-                  { name: "HEIC to JPG", href: "/tools/heic-to-jpg" },
-                ].map((tool) => (
-                  <li key={tool.href}>
-                    <Link
-                      href={tool.href}
-                      className="font-medium text-zinc-600 dark:text-zinc-400 hover:text-red-600 dark:hover:text-red-400 transition-colors"
-                    >
-                      {tool.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+              {/* Image Studio */}
+              <div className="space-y-4">
+                <h3 className="font-bold text-zinc-950 dark:text-zinc-100 text-sm uppercase tracking-wider">
+                  Image Studio
+                </h3>
+                <ul className="space-y-2.5 text-sm sm:text-[15px]">
+                  {[
+                    { name: "Compress Image", href: "/tools/compress-image" },
+                    { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
+                    { name: "Image Resizer", href: "/tools/image-resizer" },
+                    { name: "Crop Image", href: "/tools/crop-image" },
+                    { name: "JPG to PNG", href: "/tools/jpg-to-png" },
+                    { name: "PNG to WebP", href: "/tools/png-to-webp" },
+                    { name: "HEIC to JPG", href: "/tools/heic-to-jpg" },
+                  ].map((tool) => (
+                    <li key={tool.href}>
+                      <Link
+                        href={tool.href}
+                        className="font-medium text-zinc-600 dark:text-zinc-400 hover:text-red-600 dark:hover:text-red-400 transition-colors"
+                      >
+                        {tool.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-            {/* Calculators & Legal */}
-            <div className="space-y-4">
-              <h3 className="font-bold text-zinc-950 dark:text-zinc-100 text-sm uppercase tracking-wider">
-                Calculators &amp; Trust
-              </h3>
-              <ul className="space-y-2.5 text-[15px]">
-                {[
-                  { name: "Salary Tax (FBR)", href: "/tools/salary-tax-calculator" },
-                  { name: "EMI Loan Calculator", href: "/tools/emi-calculator" },
-                  { name: "CGPA Calculator", href: "/tools/cgpa-calculator" },
-                  { name: "JSON Formatter", href: "/tools/json-formatter" },
-                  { name: "QR Code Generator", href: "/tools/qr-code-generator" },
-                  { name: "Zero-Storage Policy", href: "/privacy" },
-                  { name: "Architecture & Mission", href: "/about" },
-                  { name: "Contact & Feedback", href: "/contact" },
-                ].map((tool) => (
-                  <li key={tool.href}>
-                    <Link
-                      href={tool.href}
-                      className="font-medium text-zinc-600 dark:text-zinc-400 hover:text-red-600 dark:hover:text-red-400 transition-colors"
-                    >
-                      {tool.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              {/* Calculators & Legal */}
+              <div className="col-span-2 sm:col-span-1 space-y-4">
+                <h3 className="font-bold text-zinc-950 dark:text-zinc-100 text-sm uppercase tracking-wider">
+                  Calculators &amp; Trust
+                </h3>
+                <ul className="grid grid-cols-2 sm:grid-cols-1 gap-x-6 gap-y-2.5 sm:space-y-2.5 sm:gap-y-0 text-sm sm:text-[15px]">
+                  {[
+                    { name: "Salary Tax (FBR)", href: "/tools/salary-tax-calculator" },
+                    { name: "EMI Loan Calculator", href: "/tools/emi-calculator" },
+                    { name: "CGPA Calculator", href: "/tools/cgpa-calculator" },
+                    { name: "JSON Formatter", href: "/tools/json-formatter" },
+                    { name: "QR Code Generator", href: "/tools/qr-code-generator" },
+                    { name: "Zero-Storage Policy", href: "/privacy" },
+                    { name: "Architecture & Mission", href: "/about" },
+                    { name: "Contact & Feedback", href: "/contact" },
+                  ].map((tool) => (
+                    <li key={tool.href}>
+                      <Link
+                        href={tool.href}
+                        className="font-medium text-zinc-600 dark:text-zinc-400 hover:text-red-600 dark:hover:text-red-400 transition-colors"
+                      >
+                        {tool.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
 
           {/* Bottom Bar */}
-          <div className="mt-12 sm:mt-16 pt-8 border-t border-red-100/80 dark:border-zinc-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-zinc-500 dark:text-zinc-400">
+          <div className="mt-12 sm:mt-16 pt-8 border-t border-red-100/80 dark:border-zinc-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-zinc-500 dark:text-zinc-400 text-center sm:text-left">
             <div>
               &copy; {currentYear} TheSwiftTools. Client-side local execution without tracking cookies.
             </div>
-            <div className="flex items-center gap-6 font-medium">
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-6 font-medium">
               <Link
                 href="/privacy"
                 className="hover:text-red-600 dark:hover:text-red-400 transition-colors"

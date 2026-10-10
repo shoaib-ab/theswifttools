@@ -73,23 +73,23 @@ export function ImageFormatConverter({ fromFormat, toFormat, fromMime, toMime, f
   const reset = () => { setFile(null); setResult(null); setError(null); };
 
   return (
-    <div className="w-full space-y-6">
+    <div className="w-full h-full flex flex-col flex-1">
       {!file ? (
         <div
           onDragOver={(e) => { e.preventDefault(); setIsDrag(true); }}
           onDragLeave={() => setIsDrag(false)}
           onDrop={(e) => { e.preventDefault(); setIsDrag(false); if (e.dataTransfer.files?.[0]) processFile(e.dataTransfer.files[0]); }}
-          className={`relative rounded-3xl border-2 transition-all p-8 sm:p-12 text-center flex flex-col items-center justify-center min-h-[360px] ${
+          className={`relative rounded-3xl border-2 transition-all p-6 sm:p-12 text-center flex flex-col items-center justify-center flex-1 h-full min-h-[360px] sm:min-h-[420px] ${
             isDrag
               ? "border-red-500 bg-red-50/60 dark:bg-red-950/30 scale-[1.01]"
               : "border-dashed border-zinc-300 dark:border-zinc-700 hover:border-red-500 bg-zinc-50/40 dark:bg-zinc-900/30"
           }`}
         >
           <input id={`fmt-conv-input-${toExt}`} type="file" accept={fromExt} className="hidden" onChange={(e) => { if (e.target.files?.[0]) processFile(e.target.files[0]); }} />
-          <div className="space-y-4 flex flex-col items-center max-w-md">
+          <div className="space-y-4 flex flex-col items-center max-w-md my-auto w-full">
             <button
               onClick={() => document.getElementById(`fmt-conv-input-${toExt}`)?.click()}
-              className="px-8 sm:px-12 py-5 rounded-2xl bg-red-600 hover:bg-red-700 text-white font-extrabold text-lg sm:text-xl shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3.5 cursor-pointer"
+              className="w-full sm:w-auto px-6 sm:px-12 py-4 sm:py-5 rounded-2xl bg-red-600 hover:bg-red-700 text-white font-extrabold text-base sm:text-xl shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3.5 cursor-pointer"
             >
               <UploadCloud className="h-6 w-6 sm:h-7 sm:w-7 stroke-[2.4]" />
               Select {fromFormat} File
@@ -104,12 +104,10 @@ export function ImageFormatConverter({ fromFormat, toFormat, fromMime, toMime, f
               </p>
             </div>
 
-            <div className="pt-2">
-              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-400 border border-emerald-200/80 dark:border-emerald-800/60">
-                <Shield className="h-3.5 w-3.5 text-emerald-600" />
-                100% In-Browser &bull; Files never leave your device
-              </span>
-            </div>
+            <p className="pt-2 text-xs font-medium text-zinc-500 dark:text-zinc-400 flex items-center justify-center gap-1.5">
+              <Shield className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-500" />
+              100% In-Browser &bull; Files never leave your device
+            </p>
           </div>
         </div>
       ) : (

@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { ArrowLeft, Home, Zap, Compass, FileText } from "lucide-react";
+import { ArrowLeft, Home, Compass, FileText } from "lucide-react";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
+import { BrandLogo } from "@/components/ui/brand-logo";
 
 export default function NotFound() {
   return (
@@ -11,10 +12,8 @@ export default function NotFound() {
           href="/"
           className="flex items-center gap-2.5 text-zinc-900 dark:text-zinc-100 group"
         >
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-red-600 text-white shadow-xs">
-            <Zap className="h-4 w-4 fill-current" />
-          </div>
-          <span className="font-bold text-base tracking-tight group-hover:text-red-600 transition-colors">
+          <BrandLogo size={32} />
+          <span className="font-bold text-base tracking-tight group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors">
             TheSwiftTools
           </span>
         </Link>

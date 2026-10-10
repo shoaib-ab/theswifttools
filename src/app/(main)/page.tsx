@@ -10,7 +10,6 @@ import {
   Scissors,
   Zap,
   Search,
-  ArrowRight,
   Palette,
   ArrowLeftRight,
   Layers,
@@ -39,8 +38,8 @@ import {
   KeyRound,
   QrCode,
   Hash,
-  ChevronLeft,
-  ChevronRight,
+  ArrowLeft,
+  ArrowRight,
   ChevronDown,
   Check,
   ShieldCheck,
@@ -238,8 +237,8 @@ function HomeContent() {
   return (
     <main className="flex-1 flex flex-col bg-transparent">
       {/* ─── HERO: ILOVEPDF-STYLE CENTERED TITLE & CATEGORY PILLS ──────────── */}
-      <section className="bg-transparent px-4 pt-16 pb-14 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-4xl text-center space-y-6">
+      <section className="bg-transparent px-4 pt-8 pb-3 sm:pt-16 sm:pb-14 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-4xl text-center space-y-4 sm:space-y-6">
           {/* Main Title (Generous, bold, high-contrast) */}
           <h1 className="text-3xl sm:text-5xl lg:text-[54px] font-extrabold tracking-tight text-zinc-950 dark:text-zinc-50 leading-[1.14]">
             Every tool you need to work with files in{" "}
@@ -258,10 +257,10 @@ function HomeContent() {
               <input
                 ref={searchInputRef}
                 type="text"
-                placeholder="Search 44+ tools (e.g. compress image, word to pdf, tax, emi)..."
+                placeholder="Search 44+ tools (compress, pdf, convert, tax)..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full h-14 pl-3.5 pr-24 text-base font-medium bg-transparent text-zinc-950 dark:text-zinc-50 placeholder:text-zinc-400 focus:outline-none"
+                className="w-full h-14 pl-3.5 pr-20 text-base font-medium bg-transparent text-zinc-950 dark:text-zinc-50 placeholder:text-zinc-400 focus:outline-none"
               />
               <div className="absolute right-3.5 flex items-center gap-1.5">
                 {searchQuery ? (
@@ -281,14 +280,13 @@ function HomeContent() {
           </div>
 
           {/* iLovePDF-style Filter Pills (Comfortable 15px font, bold, clear active state) */}
-          <div className="flex flex-wrap items-center justify-center gap-2.5 pt-4">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 pt-4">
             <button
               onClick={() => setSelectedCategory(null)}
-              className={`text-sm sm:text-[15px] font-bold px-5 py-2.5 rounded-full transition-all cursor-pointer ${
-                selectedCategory === null
-                  ? "bg-red-600 text-white shadow-xs"
-                  : "bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700"
-              }`}
+              className={`text-sm sm:text-[15px] font-bold px-4 sm:px-5 py-2 sm:py-2.5 rounded-full whitespace-nowrap transition-all cursor-pointer ${selectedCategory === null
+                ? "bg-red-600 text-white shadow-xs"
+                : "bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700"
+                }`}
             >
               All Tools ({TOOLS.length})
             </button>
@@ -302,11 +300,10 @@ function HomeContent() {
                 <button
                   key={cat.id}
                   onClick={() => setSelectedCategory(isSelected ? null : cat.id)}
-                  className={`text-sm sm:text-[15px] font-bold px-5 py-2.5 rounded-full transition-all cursor-pointer ${
-                    isSelected
-                      ? "bg-red-600 text-white shadow-xs"
-                      : "bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700"
-                  }`}
+                  className={`text-sm sm:text-[15px] font-bold px-4 sm:px-5 py-2 sm:py-2.5 rounded-full whitespace-nowrap transition-all cursor-pointer ${isSelected
+                    ? "bg-red-600 text-white shadow-xs"
+                    : "bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700"
+                    }`}
                 >
                   {cat.label} ({count})
                 </button>
@@ -317,17 +314,18 @@ function HomeContent() {
       </section>
 
       {/* ─── MAIN TOOL DIRECTORY GRID (SPACIOUS, LARGE READABLE TYPOGRAPHY) ── */}
-      <section id="explore" className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 w-full space-y-8 scroll-mt-20">
+      <section id="explore" className="mx-auto max-w-7xl px-4 pt-1 pb-10 sm:py-14 sm:px-6 lg:px-8 w-full space-y-6 sm:space-y-8 scroll-mt-20">
         {/* Count & Pagination Meta Bar */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-sm sm:text-[15px] text-zinc-600 dark:text-zinc-400 border-b border-zinc-200 dark:border-zinc-800 pb-4">
-          <span className="font-medium">
+        <div className="flex flex-row items-center justify-between gap-2 sm:gap-4 text-xs sm:text-[15px] text-zinc-600 dark:text-zinc-400 border-b border-zinc-200 dark:border-zinc-800 pb-3 sm:pb-4">
+          <span className="font-medium truncate pr-1">
             Showing <strong className="text-zinc-950 dark:text-zinc-100 tabular-digits">{(currentPage - 1) * pageSize + 1}</strong>–
             <strong className="text-zinc-950 dark:text-zinc-100 tabular-digits">{Math.min(currentPage * pageSize, filteredTools.length)}</strong> of{" "}
             <strong className="text-zinc-950 dark:text-zinc-100 tabular-digits">{filteredTools.length} tools</strong>
           </span>
 
-          <div className="flex items-center gap-2">
-            <span className="font-medium text-xs sm:text-sm">Show per page:</span>
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            <span className="font-medium text-xs sm:text-sm hidden sm:inline">Show per page:</span>
+            <span className="font-medium text-xs sm:hidden text-zinc-500">Show:</span>
             <CustomSelect
               value={pageSize}
               onChange={(val) => {
@@ -340,7 +338,7 @@ function HomeContent() {
                 { value: 100, label: "All tools" },
               ]}
               size="sm"
-              className="w-32 sm:w-36"
+              className="w-28 sm:w-36"
             />
           </div>
         </div>
@@ -427,13 +425,13 @@ function HomeContent() {
                   <strong className="text-zinc-950 dark:text-zinc-100">{totalPages}</strong>
                 </span>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-start">
                   <button
                     onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                     disabled={currentPage === 1}
-                    className="h-10 px-4 rounded-full border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-sm font-bold text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 disabled:opacity-30 disabled:pointer-events-none transition-colors cursor-pointer"
+                    className="flex-1 sm:flex-none justify-center h-10 px-4 rounded-full border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-sm font-bold text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 disabled:opacity-30 disabled:pointer-events-none transition-colors cursor-pointer inline-flex items-center"
                   >
-                    <ChevronLeft className="h-4 w-4 inline mr-1" /> Previous
+                    <ArrowLeft className="h-4 w-4 inline mr-1" /> Previous
                   </button>
 
                   <div className="hidden sm:flex items-center gap-1">
@@ -441,11 +439,10 @@ function HomeContent() {
                       <button
                         key={page}
                         onClick={() => setCurrentPage(page)}
-                        className={`h-10 w-10 rounded-full text-sm font-bold cursor-pointer transition-colors ${
-                          currentPage === page
-                            ? "bg-red-600 text-white shadow-xs"
-                            : "border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800"
-                        }`}
+                        className={`h-10 w-10 rounded-full text-sm font-bold cursor-pointer transition-colors ${currentPage === page
+                          ? "bg-red-600 text-white shadow-xs"
+                          : "border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                          }`}
                       >
                         {page}
                       </button>
@@ -455,9 +452,9 @@ function HomeContent() {
                   <button
                     onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
                     disabled={currentPage === totalPages}
-                    className="h-10 px-4 rounded-full border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-sm font-bold text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 disabled:opacity-30 disabled:pointer-events-none transition-colors cursor-pointer"
+                    className="flex-1 sm:flex-none justify-center h-10 px-4 rounded-full border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-sm font-bold text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 disabled:opacity-30 disabled:pointer-events-none transition-colors cursor-pointer inline-flex items-center"
                   >
-                    Next <ChevronRight className="h-4 w-4 inline ml-1" />
+                    Next <ArrowRight className="h-4 w-4 inline ml-1" />
                   </button>
                 </div>
               </div>
@@ -467,8 +464,8 @@ function HomeContent() {
       </section>
 
       {/* ─── FEATURE SECTION: "WORK YOUR WAY" (INSP: ILOVEPDF HERO BANNER) ── */}
-      <section className="bg-white/75 dark:bg-zinc-900/75 backdrop-blur-xs border-t border-b border-zinc-200/80 dark:border-zinc-800/80 py-18 px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl space-y-12">
+      <section className="bg-white/75 dark:bg-zinc-900/75 backdrop-blur-xs border-t border-b border-zinc-200/80 dark:border-zinc-800/80 py-8 sm:py-18 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl space-y-6 sm:space-y-12">
           <div className="text-center space-y-3 max-w-2xl mx-auto">
             <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-950 dark:text-zinc-50">
               The privacy standard for{" "}
@@ -523,7 +520,7 @@ function HomeContent() {
       <section
         id="faq"
         aria-labelledby="faq-heading"
-        className="mx-auto max-w-4xl px-4 py-20 sm:px-6 lg:px-8 w-full space-y-8"
+        className="mx-auto max-w-4xl px-4 py-8 sm:py-20 sm:px-6 lg:px-8 w-full space-y-6 sm:space-y-8"
       >
         <div className="text-center space-y-3">
           <h2
@@ -550,9 +547,8 @@ function HomeContent() {
                   >
                     <span>{faq.q}</span>
                     <ChevronDown
-                      className={`h-5 w-5 text-zinc-400 transition-transform duration-200 shrink-0 ml-4 ${
-                        isOpen ? "rotate-180" : ""
-                      }`}
+                      className={`h-5 w-5 text-zinc-400 transition-transform duration-200 shrink-0 ml-4 ${isOpen ? "rotate-180" : ""
+                        }`}
                     />
                   </button>
                 </dt>

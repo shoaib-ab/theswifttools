@@ -160,7 +160,7 @@ export function SvgToPngTool() {
                 Export Options
               </span>
               <button
-                onClick={resetAll}
+                onClick={reset}
                 className="text-sm font-semibold text-zinc-500 hover:text-red-600 dark:hover:text-red-400 flex items-center gap-1.5 transition-colors cursor-pointer"
               >
                 <RotateCcw className="h-4 w-4" /> Reset

@@ -135,7 +135,7 @@ export function ToolSidebar() {
           className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 text-xs font-bold text-zinc-900 dark:text-zinc-100 shadow-2xs hover:border-red-400 transition-colors cursor-pointer"
         >
           <PanelLeftOpen className="h-3.5 w-3.5 text-red-600" />
-          Browse 44 Tools
+          Browse Tools
         </button>
         <span className="text-[11px] font-mono font-semibold text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
           <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
@@ -251,7 +251,7 @@ export function ToolSidebar() {
             aria-label="Expand tools sidebar"
           >
             <PanelLeftOpen className="h-4 w-4 text-red-600 transition-transform group-hover:scale-110" />
-            <span>Browse 44 Tools</span>
+            <span>Browse Tools</span>
           </button>
         </div>
       )}

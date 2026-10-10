@@ -3,8 +3,8 @@
 import * as React from "react";
 import Link from "next/link";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
+import { BrandLogo } from "@/components/ui/brand-logo";
 import {
-  Zap,
   Menu,
   X,
   ChevronDown,
@@ -93,7 +93,7 @@ export function Header() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-zinc-200/70 bg-white/90 backdrop-blur-md dark:border-zinc-800/80 dark:bg-zinc-950/90 shadow-md shadow-zinc-200/40 dark:shadow-black/40 transition-all">
+    <header className="sticky top-0 z-50 w-full border-b border-red-200/60 bg-gradient-to-r from-white via-red-50 to-white/95 backdrop-blur-md dark:border-zinc-800/80 dark:bg-gradient-to-r dark:from-zinc-950 dark:via-red-950/25 dark:to-zinc-950 shadow-md shadow-red-500/5 dark:shadow-black/40 transition-all">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Brand identity */}
         <div className="flex items-center gap-6">
@@ -101,10 +101,8 @@ export function Header() {
             href="/"
             className="flex items-center gap-2.5 text-zinc-950 dark:text-zinc-50 group shrink-0 focus-visible:outline-none"
           >
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-red-600 text-white shadow-xs">
-              <Zap className="h-5 w-5 fill-current" />
-            </div>
-            <span className="font-extrabold text-lg sm:text-xl tracking-tight text-zinc-950 dark:text-zinc-50">
+            <BrandLogo size={36} />
+            <span className="font-extrabold text-lg sm:text-xl tracking-tight text-zinc-950 dark:text-zinc-50 group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors">
               TheSwiftTools
             </span>
           </Link>
@@ -192,7 +190,7 @@ export function Header() {
                       onClick={() => setMegaOpen(false)}
                       className="font-bold text-red-600 dark:text-red-400 hover:underline flex items-center gap-1.5"
                     >
-                      Browse full directory ({44} tools) <ArrowRight className="h-4 w-4" />
+                      Browse full directory <ArrowRight className="h-4 w-4" />
                     </Link>
                   </div>
                 </div>
@@ -210,7 +208,7 @@ export function Header() {
             href="/#explore"
             className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-sm font-bold shadow-sm hover:shadow transition-all"
           >
-            Browse 44 Tools
+            Browse Tools
           </Link>
 
           {/* Mobile menu toggle */}
@@ -226,21 +224,58 @@ export function Header() {
 
       {/* Mobile nav drawer */}
       {menuOpen && (
-        <div className="lg:hidden border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 px-4 py-4 space-y-4 max-h-[80vh] overflow-y-auto">
+        <div className="lg:hidden border-t border-zinc-200/80 dark:border-zinc-800/80 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md px-4 py-4 space-y-4 max-h-[80vh] overflow-y-auto shadow-2xl">
+          {/* Mobile CTA */}
+          <div className="pb-1">
+            <Link
+              href="/#explore"
+              onClick={() => setMenuOpen(false)}
+              className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-red-600 hover:bg-red-700 text-white text-sm font-bold shadow-sm transition-all"
+            >
+              Browse All 44 Tools <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          {/* Quick Shortcuts */}
+          <div className="space-y-2 pb-2 border-b border-zinc-100 dark:border-zinc-800/80">
+            <h4 className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+              Popular Tools
+            </h4>
+            <div className="grid grid-cols-2 gap-2">
+              {[
+                { name: "Merge PDF", href: "/tools/merge-pdf" },
+                { name: "Split PDF", href: "/tools/split-pdf" },
+                { name: "Compress Image", href: "/tools/compress-image" },
+                { name: "Word to PDF", href: "/tools/word-to-pdf" },
+              ].map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="px-3 py-2.5 rounded-xl bg-zinc-100/90 dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800/60 hover:border-red-300 dark:hover:border-red-900/60 hover:text-red-600 dark:hover:text-red-400 text-xs font-bold text-zinc-900 dark:text-zinc-100 transition-colors flex items-center justify-between"
+                >
+                  <span className="truncate">{item.name}</span>
+                  <ArrowRight className="h-3 w-3 text-zinc-400 shrink-0 ml-1" />
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Categorized Tools */}
           {MEGAMENU_SECTIONS.map((sec) => (
             <div key={sec.title} className="space-y-2">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-500 border-b border-zinc-100 dark:border-zinc-800 pb-1">
+              <h4 className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 border-b border-zinc-100 dark:border-zinc-800 pb-1">
                 {sec.title}
               </h4>
-              <div className="grid grid-cols-2 gap-1.5">
+              <div className="grid grid-cols-2 gap-2">
                 {sec.tools.map((tool) => (
                   <Link
                     key={tool.href}
                     href={tool.href}
                     onClick={() => setMenuOpen(false)}
-                    className="p-2 rounded-lg bg-zinc-50 dark:bg-zinc-900 text-xs font-semibold text-zinc-900 dark:text-zinc-100"
+                    className="p-2.5 min-h-[42px] rounded-xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200/50 dark:border-zinc-800/50 hover:bg-white dark:hover:bg-zinc-900 hover:border-red-300 dark:hover:border-red-800/60 text-xs font-semibold text-zinc-800 dark:text-zinc-200 hover:text-red-600 dark:hover:text-red-400 transition-all flex items-center"
                   >
-                    {tool.name}
+                    <span className="truncate">{tool.name}</span>
                   </Link>
                 ))}
               </div>

@@ -47,21 +47,22 @@ export default function CompressImagePage() {
       </div>
 
       {/* 2-Column Content Section: Tool on left, Trust CTAs on right */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        <div className="lg:col-span-8">
+      {/* 2-Column Content Section: Tool on left, Trust CTAs on right */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-8 items-stretch">
+        <div className="lg:col-span-8 flex flex-col">
           <CompressImageTool />
         </div>
 
-        <div className="lg:col-span-4 space-y-3">
-          <div className="pb-1 border-b border-zinc-200/80 dark:border-zinc-800/80 flex items-center justify-between">
+        <div className="lg:col-span-4 flex flex-col">
+          <div className="pb-1 border-b border-zinc-200/80 dark:border-zinc-800/80 flex items-center justify-between mb-3 shrink-0">
             <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
               Guaranteed Execution
             </h3>
-            <span className="text-[10px] font-mono font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded-full">
+            <span className="text-[11px] font-mono font-medium text-emerald-600 dark:text-emerald-400">
               RAM ONLY
             </span>
           </div>
-          <TrustCtaCards />
+          <TrustCtaCards className="flex-1" />
         </div>
       </div>
 
